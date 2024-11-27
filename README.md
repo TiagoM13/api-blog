@@ -1,73 +1,97 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Postory - API de Blog
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+**Postory** é uma API de blog construída com NestJS, Prisma ORM e PostgreSQL. O projeto permite gerenciar posts de blog com operações CRUD, oferecendo funcionalidades como criação, leitura, atualização e exclusão de posts.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+### Tecnologias Utilizadas
+- **NestJS**: Framework para Node.js que facilita a construção de APIs escaláveis e bem estruturadas.
+- **Prisma** ORM: ORM (Object-Relational Mapping) para Node.js, usado para interagir com o banco de dados PostgreSQL de maneira eficiente.
+- **PostgreSQL**: Banco de dados relacional utilizado para armazenar dados dos posts.
+- **TypeScript**: Linguagem de programação para garantir maior segurança no desenvolvimento e melhorar a legibilidade do código.
+- **ESLint & Prettier**: Ferramentas para garantir a qualidade e consistência do código.
 
-## Description
+### Exemplo de Requisição e Resposta
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+#### Criar um Post
 
-## Installation
+**Request Body**
 
-```bash
-$ npm install
+```json
+{
+  "title": "Introdução ao NestJS com Prisma",
+  "content": "NestJS é um framework poderoso para construir aplicações escaláveis em Node.js...",
+  "author": "Autor Exemplo",
+  "category": "Desenvolvimento Web",
+  "tags": ["nestjs", "prisma", "backend"],
+  "isPublished": true,
+  "publishedAt": "2024-11-27T10:00:00.000Z",
+  "thumbnail": "https://example.com/thumbnail.jpg"
+}
 ```
 
-## Running the app
+**Resposta**
 
-```bash
-# development
-$ npm run start
+```json
+{
+  "post": {
+    "id": "79bb8484-09b1-43fc-ac96-109b41da186e",
+    "title": "Introdução ao NestJS com Prisma",
+    "content": "NestJS é um framework poderoso para construir aplicações escaláveis em Node.js...",
+    "author": "Autor Exemplo",
+    "category": "Desenvolvimento Web",
+    "tags": ["nestjs", "prisma", "backend"],
+    "isPublished": true,
+    "publishedAt": "2024-11-27T10:00:00.000Z",
+    "thumbnail": "https://example.com/thumbnail.jpg",
+    "createdAt": "2024-11-27T10:00:00.000Z",
+    "updatedAt": "2024-11-27T10:00:00.000Z"
+  }
+}
+```
+#### Obter Todos os Posts
 
-# watch mode
-$ npm run start:dev
+**Resposta**
 
-# production mode
-$ npm run start:prod
+```json
+{
+  "posts": [
+    {
+      "id": "79bb8484-09b1-43fc-ac96-109b41da186e",
+      "title": "Introdução ao NestJS com Prisma",
+      "content": "NestJS é um framework poderoso para construir aplicações escaláveis em Node.js...",
+      "author": "Autor Exemplo",
+      "category": "Desenvolvimento Web",
+      "tags": ["nestjs", "prisma", "backend"],
+      "isPublished": true,
+      "publishedAt": "2024-11-27T10:00:00.000Z",
+      "thumbnail": "https://example.com/thumbnail.jpg",
+      "createdAt": "2024-11-27T10:00:00.000Z",
+      "updatedAt": "2024-11-27T10:00:00.000Z"
+    }
+  ]
+}
 ```
 
-## Test
+#### Obter um Post Específico
+**Request Params:**
 
-```bash
-# unit tests
-$ npm run test
+ * `id`: O ID do post a ser recuperado. Obter um Post Específico
 
-# e2e tests
-$ npm run test:e2e
+**Resposta**
 
-# test coverage
-$ npm run test:cov
+```json
+{
+  "post": {
+    "id": "79bb8484-09b1-43fc-ac96-109b41da186e",
+    "title": "Introdução ao NestJS com Prisma",
+    "content": "NestJS é um framework poderoso para construir aplicações escaláveis em Node.js...",
+    "author": "Autor Exemplo",
+    "category": "Desenvolvimento Web",
+    "tags": ["nestjs", "prisma", "backend"],
+    "isPublished": true,
+    "publishedAt": "2024-11-27T10:00:00.000Z",
+    "thumbnail": "https://example.com/thumbnail.jpg",
+    "createdAt": "2024-11-27T10:00:00.000Z",
+    "updatedAt": "2024-11-27T10:00:00.000Z"
+  }
+}
 ```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
