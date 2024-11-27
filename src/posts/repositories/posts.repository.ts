@@ -1,35 +1,37 @@
-import { Injectable } from "@nestjs/common";
-import { PrismaService } from "src/prisma/prisma.service";
-import { Post } from "../interfaces/posts.interface";
+import { Injectable } from '@nestjs/common';
+import { Post } from '@prisma/client';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { CreatePostDTO } from '../dto/create-post.dto';
+import { UpdatePostDTO } from '../dto/update-post.dto';
 
 @Injectable()
-export class PostsRepository {
-    constructor(private prisma: PrismaService) {}
-    
-    async findAll(): Promise<Post[]> {
-        return await this.prisma.post.findMany()
-    }
+export class PostRepository {
+  constructor(private prisma: PrismaService) {}
 
-    async findById(id: number): Promise<Post | null> {
-        return await this.prisma.post.findUnique({
-            where: { id }
-        })
-    }
+  async findAll(): Promise<Post[]> {
+    return await this.prisma.post.findMany();
+  }
 
-    async create(data: Omit<Post, 'id' | 'created_at' | 'updated_at'>): Promise<Post> {
-        return await this.prisma.post.create({ data })
-    }
+  async findById(id: string): Promise<Post | null> {
+    return await this.prisma.post.findUnique({
+      where: { id },
+    });
+  }
 
-    async update(id: number, data: Post): Promise<Post> {
-        return await this.prisma.post.update({
-            where: { id },
-            data
-        })
-    }
+  async create(data: CreatePostDTO): Promise<Post> {
+    return await this.prisma.post.create({ data });
+  }
 
-    async delete(id: number): Promise<Post> {
-        return await this.prisma.post.delete({
-            where: { id }
-        })
-    }
+  async update(id: string, data: UpdatePostDTO): Promise<Post> {
+    return await this.prisma.post.update({
+      where: { id },
+      data,
+    });
+  }
+
+  async delete(id: string): Promise<Post> {
+    return await this.prisma.post.delete({
+      where: { id },
+    });
+  }
 }
