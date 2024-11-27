@@ -8,31 +8,36 @@ import { PostRepository } from './repositories/posts.repository';
 export class PostsService {
   constructor(private readonly postRepository: PostRepository) {}
 
-  async findAll(): Promise<Post[]> {
+  async findAll(): Promise<{ posts: Post[] }> {
     return this.postRepository.findAll();
   }
 
-  async findOne(id: string): Promise<Post> {
+  async findById(id: string): Promise<{ post: Post }> {
     const post = await this.postRepository.findById(id);
 
     if (!post) {
       throw new NotFoundException('Post not found.');
     }
 
+    return { post };
+  }
+
+  async create(createPostDto: CreatePostDTO): Promise<{ post: Post }> {
+    const post = this.postRepository.create(createPostDto);
     return post;
   }
 
-  async create(createPostDto: CreatePostDTO): Promise<Post> {
-    return this.postRepository.create(createPostDto);
-  }
-
-  async update(id: string, updatePostDto: UpdatePostDTO): Promise<Post> {
-    await this.findOne(id);
-    return this.postRepository.update(id, updatePostDto);
+  async update(
+    id: string,
+    updatePostDto: UpdatePostDTO,
+  ): Promise<{ post: Post }> {
+    await this.findById(id);
+    const post = await this.postRepository.update(id, updatePostDto);
+    return post;
   }
 
   async remove(id: string) {
-    await this.findOne(id);
+    await this.findById(id);
 
     await this.postRepository.delete(id);
   }

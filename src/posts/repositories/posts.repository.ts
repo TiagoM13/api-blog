@@ -8,25 +8,31 @@ import { UpdatePostDTO } from '../dto/update-post.dto';
 export class PostRepository {
   constructor(private prisma: PrismaService) {}
 
-  async findAll(): Promise<Post[]> {
-    return await this.prisma.post.findMany();
+  async findAll(): Promise<{ posts: Post[] }> {
+    const posts = await this.prisma.post.findMany();
+    return { posts };
   }
 
   async findById(id: string): Promise<Post | null> {
-    return await this.prisma.post.findUnique({
+    const post = await this.prisma.post.findUnique({
       where: { id },
     });
+    return post;
   }
 
-  async create(data: CreatePostDTO): Promise<Post> {
-    return await this.prisma.post.create({ data });
+  async create(data: CreatePostDTO): Promise<{ post: Post }> {
+    const post = await this.prisma.post.create({ data });
+
+    return { post };
   }
 
-  async update(id: string, data: UpdatePostDTO): Promise<Post> {
-    return await this.prisma.post.update({
+  async update(id: string, data: UpdatePostDTO): Promise<{ post: Post }> {
+    const post = await this.prisma.post.update({
       where: { id },
       data,
     });
+
+    return { post };
   }
 
   async delete(id: string): Promise<Post> {
