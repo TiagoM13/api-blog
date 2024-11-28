@@ -1,49 +1,44 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
-import { Post } from "./interfaces/posts.interface";
-import { PostsRepository } from "./repositories/posts.repository";
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { Post } from '@prisma/client';
+import { CreatePostDTO } from './dto/create-post.dto';
+import { UpdatePostDTO } from './dto/update-post.dto';
+import { PostRepository } from './repositories/posts.repository';
 
 @Injectable()
 export class PostsService {
-    constructor(private readonly repository: PostsRepository) { }
+  constructor(private readonly postRepository: PostRepository) {}
 
-    async getPosts(): Promise<{ posts: Post[] }> {
-        const posts = await this.repository.findAll()
-        return { posts }
+  async findAll(): Promise<{ posts: Post[] }> {
+    return this.postRepository.findAll();
+  }
+
+  async findById(id: string): Promise<{ post: Post }> {
+    const post = await this.postRepository.findById(id);
+
+    if (!post) {
+      throw new NotFoundException('Post not found.');
     }
 
-    async getPost(id: number): Promise<{ post: Post | null }> {
-        const post = await this.repository.findById(id)
+    return { post };
+  }
 
-        if (!post) {
-            throw new NotFoundException(`Post with ID ${id} not found`)
-        }
+  async create(createPostDto: CreatePostDTO): Promise<{ post: Post }> {
+    const post = this.postRepository.create(createPostDto);
+    return post;
+  }
 
-        return { post }
-    }
+  async update(
+    id: string,
+    updatePostDto: UpdatePostDTO,
+  ): Promise<{ post: Post }> {
+    await this.findById(id);
+    const post = await this.postRepository.update(id, updatePostDto);
+    return post;
+  }
 
-    async createPost(data: Omit<Post, 'id' | 'created_at' | 'updated_at'>): Promise<Post> {
-        return await this.repository.create(data)
-    }
+  async remove(id: string) {
+    await this.findById(id);
 
-    async updatePost(id: number, data: Post): Promise<Post> {
-        const post = await this.repository.findById(id)
-
-        if (!post) {
-            throw new NotFoundException(`Post with ID ${id} not found`)
-        }
-
-        return this.repository.update(id, data)
-    }
-
-    async deletePost(id: number): Promise<{ message: string }> {
-        const post = await this.repository.findById(id)
-
-        if (!post) {
-            throw new NotFoundException(`Post with ID ${id} not found`)
-        }
-
-        await this.repository.delete(id)
-
-        return { message: 'Post deleted successfully' };
-    }
+    await this.postRepository.delete(id);
+  }
 }
