@@ -1,11 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { Post } from '@prisma/client';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { CreatePostDTO } from '../dto/create-post.dto';
-import { UpdatePostDTO } from '../dto/update-post.dto';
+import { PostRepository } from 'src/app/contracts/post-repository';
+import {
+  CreatePostDto,
+  Post,
+  UpdatePostDto,
+} from 'src/domain/entities/post.entity';
+import { PrismaService } from 'src/infra/services/prisma/prisma.service';
 
 @Injectable()
-export class PostRepository {
+export class PostRepositoryPrisma implements PostRepository {
   constructor(private prisma: PrismaService) {}
 
   async findAll(): Promise<{ posts: Post[] }> {
@@ -15,18 +18,18 @@ export class PostRepository {
 
   async findById(id: string): Promise<Post | null> {
     const post = await this.prisma.post.findUnique({
-      where: { id },
+      where: { id: id },
     });
     return post;
   }
 
-  async create(data: CreatePostDTO): Promise<{ post: Post }> {
+  async create(data: CreatePostDto): Promise<{ post: Post }> {
     const post = await this.prisma.post.create({ data });
 
     return { post };
   }
 
-  async update(id: string, data: UpdatePostDTO): Promise<{ post: Post }> {
+  async update(id: string, data: UpdatePostDto): Promise<{ post: Post }> {
     const post = await this.prisma.post.update({
       where: { id },
       data,

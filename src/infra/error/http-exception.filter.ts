@@ -8,7 +8,7 @@ import {
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
-  catch(exception: any, host: ArgumentsHost) {
+  catch(exception: unknown, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse();
     const request = ctx.getRequest();
@@ -22,6 +22,8 @@ export class AllExceptionsFilter implements ExceptionFilter {
       exception instanceof HttpException
         ? exception.getResponse()
         : 'Internal server error';
+
+    console.log(exception);
 
     response.status(status).json({
       statusCode: status,

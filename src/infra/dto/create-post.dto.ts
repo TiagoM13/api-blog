@@ -1,14 +1,14 @@
 import {
   IsArray,
-  IsBoolean,
   IsDateString,
   IsOptional,
   IsString,
   IsUrl,
   Length,
 } from 'class-validator';
+import { CreatePostDto } from 'src/domain/entities/post.entity';
 
-export class CreatePostDTO {
+export class CreatePostDtoInfra implements Omit<CreatePostDto, 'id'> {
   @IsString()
   @Length(5, 255)
   title: string;
@@ -35,10 +35,6 @@ export class CreatePostDTO {
   tags?: string[];
 
   @IsOptional()
-  @IsBoolean()
-  isPublished?: boolean;
-
-  @IsOptional()
   @IsDateString()
-  publishedAt?: string;
+  publishedAt?: Date;
 }

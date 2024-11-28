@@ -81,7 +81,7 @@
     "testEnvironment": "node"
   },
   "prisma": {
-    "schema": "./src/infra/prisma/schema.prisma",
-    "migrateOutput": "./src/infra/prisma/migrations"
+    "schema": "./src/infra/database/prisma/schema.prisma",
+    "migrateOutput": "./src/infra/database/prisma/migrations"
   }
 }
