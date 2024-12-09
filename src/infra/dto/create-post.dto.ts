@@ -7,7 +7,7 @@ import {
   IsUrl,
   Length,
 } from 'class-validator';
-import { CreatePostDto } from 'src/domain/entities/post.entity';
+import { CreatePostDto } from '@/domain/entities/post.entity';
 
 export class CreatePostDtoInfra implements Omit<CreatePostDto, 'id'> {
   @ApiProperty({

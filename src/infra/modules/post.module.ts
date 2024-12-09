@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 
-import { GetAllPostsUseCase } from 'src/app/use-cases/get-all-posts.use-case';
-import { GetPostUseCase } from 'src/app/use-cases/get-post.use-case';
-import { CreatePostUseCase } from 'src/app/use-cases/create-post.use-case';
-import { UpdatePostUseCase } from 'src/app/use-cases/update-post.use-case';
-import { DeletePostUseCase } from 'src/app/use-cases/delete-post.use-case';
+import { GetAllPostsUseCase } from '@/app/use-cases/get-all-posts.use-case';
+import { GetPostUseCase } from '@/app/use-cases/get-post.use-case';
+import { CreatePostUseCase } from '@/app/use-cases/create-post.use-case';
+import { UpdatePostUseCase } from '@/app/use-cases/update-post.use-case';
+import { DeletePostUseCase } from '@/app/use-cases/delete-post.use-case';
 
 import { GetAllPostsController } from '../controllers/get-all-posts';
 import { GetPostController } from '../controllers/get-posts';

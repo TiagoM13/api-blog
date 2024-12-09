@@ -6,9 +6,9 @@ import {
   Param,
   Put,
 } from '@nestjs/common';
-import { UpdatePostUseCase } from 'src/app/use-cases/update-post.use-case';
-import { UpdatePostDtoInfra } from '../dto/update-post.dto';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { UpdatePostUseCase } from '@/app/use-cases/update-post.use-case';
+import { UpdatePostDtoInfra } from '../dto/update-post.dto';
 import { PostModel } from '../model/swagger/post';
 
 @ApiTags('posts')
