@@ -4,13 +4,13 @@ import { PostRepositoryPrisma } from '@/infra/repositories/post.repository';
 import { PrismaModule } from '../prisma/prisma.module';
 
 @Module({
-  imports: [PrismaModule], // Certifique-se de que o PrismaModule está importado
+  imports: [PrismaModule],
   providers: [
     {
       provide: PostRepository,
-      useClass: PostRepositoryPrisma, // Implementação concreta
+      useClass: PostRepositoryPrisma,
     },
   ],
-  exports: [PostRepository], // Exporte o repositório para que outros módulos possam usá-lo
+  exports: [PostRepository],
 })
 export class PostPersistenceModule {}
