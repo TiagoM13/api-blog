@@ -2,7 +2,7 @@ import {
   CreatePostDto,
   Post,
   UpdatePostDto,
-} from 'src/domain/entities/post.entity';
+} from '@/domain/entities/post.entity';
 
 export interface PostRepository {
   findAll(): Promise<{ posts: Post[] }>;

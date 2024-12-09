@@ -1,5 +1,5 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { Post } from 'src/domain/entities/post.entity';
+import { Post } from '@/domain/entities/post.entity';
 import { PostRepository } from '../contracts/post-repository';
 import { POST_NOT_FOUND } from '../error/messages';
 
@@ -7,7 +7,7 @@ import { POST_NOT_FOUND } from '../error/messages';
 export class GetPostUseCase {
   constructor(
     @Inject(PostRepository) private readonly postRepository: PostRepository,
-  ) { }
+  ) {}
 
   async execute(id: string): Promise<{ post: Post }> {
     const post = await this.postRepository.findById(id);

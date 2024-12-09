@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { PostRepository } from 'src/app/contracts/post-repository';
+import { PostRepository } from '@/app/contracts/post-repository';
 import {
   CreatePostDto,
   Post,
   UpdatePostDto,
-} from 'src/domain/entities/post.entity';
-import { PrismaService } from 'src/infra/services/prisma/prisma.service';
+} from '@/domain/entities/post.entity';
+import { PrismaService } from '@/infra/services/prisma/prisma.service';
 
 @Injectable()
 export class PostRepositoryPrisma implements PostRepository {

@@ -1,7 +1,7 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
-import { CreatePostUseCase } from 'src/app/use-cases/create-post.use-case';
-import { CreatePostDtoInfra } from '../dto/create-post.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { CreatePostUseCase } from '@/app/use-cases/create-post.use-case';
+import { CreatePostDtoInfra } from '../dto/create-post.dto';
 import { PostModel } from '../model/swagger/post';
 
 @ApiTags('posts')

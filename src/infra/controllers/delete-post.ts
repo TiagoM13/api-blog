@@ -6,7 +6,7 @@ import {
   Param,
 } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { DeletePostUseCase } from 'src/app/use-cases/delete-post.use-case';
+import { DeletePostUseCase } from '@/app/use-cases/delete-post.use-case';
 
 @ApiTags('posts')
 @Controller()

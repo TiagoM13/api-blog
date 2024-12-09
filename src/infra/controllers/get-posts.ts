@@ -1,6 +1,6 @@
 import { Controller, Get, HttpCode, HttpStatus, Param } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { GetPostUseCase } from 'src/app/use-cases/get-post.use-case';
+import { GetPostUseCase } from '@/app/use-cases/get-post.use-case';
 import { PostModel } from '../model/swagger/post';
 
 @ApiTags('posts')

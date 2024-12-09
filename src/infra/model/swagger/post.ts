@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Post } from 'src/domain/entities/post.entity';
+import { Post } from '@/domain/entities/post.entity';
 
 export class PostModel implements Post {
   @ApiProperty({

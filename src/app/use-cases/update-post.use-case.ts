@@ -1,5 +1,5 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { Post, UpdatePostDto } from 'src/domain/entities/post.entity';
+import { Post, UpdatePostDto } from '@/domain/entities/post.entity';
 import { PostRepository } from '../contracts/post-repository';
 import { POST_NOT_FOUND } from '../error/messages';
 

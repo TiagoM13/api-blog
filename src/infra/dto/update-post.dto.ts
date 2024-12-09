@@ -1,6 +1,6 @@
 import { PartialType } from '@nestjs/mapped-types';
-import { CreatePostDtoInfra } from './create-post.dto';
 import { ApiProperty } from '@nestjs/swagger';
+import { CreatePostDtoInfra } from './create-post.dto';
 
 export class UpdatePostDtoInfra extends PartialType(CreatePostDtoInfra) {
   @ApiProperty({
