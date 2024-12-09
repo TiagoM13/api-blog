@@ -13,6 +13,7 @@
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "husky:prepare": "husky init",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
@@ -21,7 +22,8 @@
     "migrate": "prisma migrate deploy",
     "migrate:new": "prisma migrate dev",
     "migrate:generate": "prisma generate",
-    "migrate:reset": "prisma migrate reset"
+    "migrate:reset": "prisma migrate reset",
+    "prepare": "husky"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
@@ -53,7 +55,9 @@
     "eslint": "^8.42.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.0.0",
+    "husky": "^9.1.7",
     "jest": "^29.5.0",
+    "lint-staged": "^15.2.10",
     "prettier": "^3.0.0",
     "prisma": "^5.22.0",
     "source-map-support": "^0.5.21",
